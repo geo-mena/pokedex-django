@@ -42,6 +42,7 @@ def pokemon_detail(request, pokemon_id):
     response = requests.get(api_url)
     data = response.json()
 
+    # Extrae los datos del pokemon
     name = data.get('name', '').capitalize()
     image_url = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{pokemon_id}.png"
     height = data.get('height')
@@ -51,6 +52,7 @@ def pokemon_detail(request, pokemon_id):
     defense = data.get('stats', [])[2].get('base_stat')  
     speed = data.get('stats', [])[5].get('base_stat') 
 
+    # Crea el contexto
     context = {
         'id': pokemon_id,
         'name': name,
