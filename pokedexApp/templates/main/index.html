@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon List</title>
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #F5F5DC;
+        }
+
+        h1 {
+            text-align: center;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            width: 200px; /* Ancho de cada tarjeta */
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* Logo */
+
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 33%;
+            z-index: 2; 
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        #logo:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Card */
+
+        .pokemon-card {
+            background-color: #A7D397;
+            width: 200px;
+            height: 250px;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #79AC78;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            
+        }
+
+        .pokemon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 1px 4px 10px #A7D397;
+
+        }
+
+        .pokemon-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .pokemon_image {
+            position: relative;
+            top: -0.5em;
+            width: 13em;
+            height: auto;
+            aspect-ratio: 1;
+            z-index: 1;
+            animation: 2s movepoke infinite alternate;
+        }
+        @keyframes movepoke {
+            0% {
+                transform: translateY(0em);
+            }
+            100% {
+                transform: translateY(-1em);
+            }
+        }
+
+        .name_poke {
+            position: relative;
+            top: -0.5em;
+            font-size: 1em;
+            z-index: 2;
+            background-color: #79AC78;
+            color: whitesmoke;
+            border-radius: 12px;
+            padding: 6px;
+            text-decoration: none !important;
+        }
+        .name_poke:hover {
+            background-color: #618264;
+            color: white;
+            
+        }
+
+        /* Formulario de busqueda */
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 7rem;
+            margin-bottom: 20px;
+        }
+
+        #search {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #B4B4B3;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #A9A9A9;
+        }
+
+        /* Paginacion */
+        .pagination {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .step-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .step-links a {
+            padding: 8px;
+            margin: 0 5px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #EC8F5E;
+            color: black;
+        }
+
+        .step-links a:hover {
+            background-color: #FF6C22;
+            color: white;
+        }
+
+        .step-links .current {
+            color: black;
+        }
+
+        .names {
+            text-decoration: none;
+        }
+
+        .id_poke {
+            position: relative;
+            font-size: 18px;
+            top: -1.5em;
+            background-color: #FF8080;
+            border: 1px solid #FF8080;
+            color: whitesmoke;
+            border-radius: 16px;
+            padding: 6px;
+        }
+
+        .id_poke:hover {
+            background-color: #C94B4B;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <img id="logo" src="{% static 'img/pokedex-image.png' %}" alt="Logo">
+
+    <form method="get" action="{% url 'index' %}">
+        <input placeholder="Inserte el nombre o ID" type="text" name="q" id="search" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+   <div>
+        <ul>
+            {% for pokemon in pokemon_list %}
+                <div class="pokemon-card">
+                    <a class="names" href="{% url 'pokemon_detail' pokemon.id %}">
+                        <img class="pokemon_image" src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}">
+                        
+                        <span class="id_poke">{{ pokemon.id }}</span>
+                        <br>
+                        <span class="name_poke">{{ pokemon.name }}</span>
+                       
+                    </a>
+                </div>
+            {% endfor %}
+        </ul>
+   </div>
+   <div class="pagination">
+        <span class="step-links">
+            {% if pokemon_list.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ pokemon_list.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ pokemon_list.number }} de {{ pokemon_list.paginator.num_pages }}
+            </span>
+
+            {% if pokemon_list.has_next %}
+                <a href="?page={{ pokemon_list.next_page_number }}">next</a>
+                <a href="?page={{ pokemon_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>

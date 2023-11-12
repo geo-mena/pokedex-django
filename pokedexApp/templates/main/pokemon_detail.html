@@ -1,0 +1,191 @@
+<!-- pokemonapp/templates/pokemonapp/pokemon_detail.html -->
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <title>{{ name }} Details</title>
+    <style>
+        
+        body {
+            margin: 0; 
+            overflow: hidden; 
+            font-family: 'Roboto', sans-serif, Verdana, Geneva, Tahoma, sans-serif;
+            background-color: white;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{% static 'img/animation.webp' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: rotateBackground 10s linear infinite;
+        }
+
+        @keyframes rotateBackground {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        .content-container img {
+            max-width: 300px;
+            border-radius: 5px;
+            margin-top: 28px;
+            
+            animation: 2s movepoke infinite alternate;
+        }
+
+        @keyframes movepoke {
+            0% {
+                transform: translateY(0em);
+            }
+            100% {
+                transform: translateY(-1em);
+            }
+        }
+
+        .name {
+            font-size: 30px;
+            margin-top: 52px;
+            color: #27374D;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 5px;
+            height: 150px;
+            margin-top: -28px;
+            
+        }
+
+        /* Abaout */
+
+        .card .about {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: space-evenly
+        }
+
+        .height {
+            border: 2px solid #FF6C22;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #EC8F5E;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .height:hover {
+            background-color: #FF6C22;
+            color: #232D3F;
+        }
+
+        .weight {
+            border: 2px solid #45a049;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #79AC78;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .weight:hover {
+            background-color: #45a049;
+            color: #232D3F;
+        }
+
+        .abilities {
+            border: 2px solid #427D9D;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #61A3BA;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .abilities:hover {
+            background-color: #427D9D;
+            color: #232D3F;
+        }
+
+        /* btn back */
+        .back-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            width: 24px;
+            border-radius: 20px;
+            display: flex;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+            box-shadow: 1px 1px 4px #3498db;
+        }
+
+        .poke_id {
+            background-color: #FF8080;
+            border: 2px solid #C94B4B;
+            color: whitesmoke;
+            border-radius: 24px;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .poke_id:hover {
+            background-color: #C94B4B;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-container"></div>
+
+    <div class="content-container">
+
+        <a href="{% url 'index'%}" class="back-button"><<</a>
+
+        <h1 class="name"><strong>{{ name }} <span class="poke_id">{{id}}</span> </strong></h1>
+        <img class="pokemon_image" src="{{ image_url }}" alt="{{ name }}">
+
+        <div class="card">
+            <div class="about">
+                <p class="height"><strong>Height: </strong> {{ height }}</p>
+                <p class="weight"><strong>Weight: </strong> {{ weight }}</p>
+            </div>
+            <span class="abilities"><strong>Abilities:</strong> {{ abilities|join:', ' }}</span>
+            <ul>
+               
+            </ul>
+        </div>
+        
+    </div>
+
+</body>
+</html>
