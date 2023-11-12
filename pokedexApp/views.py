@@ -47,6 +47,9 @@ def pokemon_detail(request, pokemon_id):
     height = data.get('height')
     weight = data.get('weight')
     abilities = [ability['ability']['name'] for ability in data.get('abilities', [])]
+    attack = data.get('stats', [])[1].get('base_stat') 
+    defense = data.get('stats', [])[2].get('base_stat')  
+    speed = data.get('stats', [])[5].get('base_stat') 
 
     context = {
         'id': pokemon_id,
@@ -55,5 +58,8 @@ def pokemon_detail(request, pokemon_id):
         'height': height,
         'weight': weight,
         'abilities': abilities,
+        'attack': attack,
+        'defense': defense,
+        'speed': speed,
     }
     return render(request, 'main/pokemon_detail.html', context)

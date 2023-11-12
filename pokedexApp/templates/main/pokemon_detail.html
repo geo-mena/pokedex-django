@@ -6,6 +6,7 @@
 
 <head>
     <title>{{ name }} Details</title>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
     <style>
         
         body {
@@ -66,6 +67,7 @@
             font-size: 30px;
             margin-top: 52px;
             color: #27374D;
+            font-family: Bangers;
         }
 
         .card {
@@ -83,7 +85,8 @@
             flex-direction: row;
             flex-wrap: nowrap;
             align-content: center;
-            justify-content: space-evenly
+            justify-content: space-evenly;
+            margin-bottom: 10px;
         }
 
         .height {
@@ -125,6 +128,48 @@
 
         .abilities:hover {
             background-color: #427D9D;
+            color: #232D3F;
+        }
+
+        .attack {
+            border: 2px solid #9D76C1;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #D0A2F7;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .attack:hover {
+            background-color: #9D76C1;
+            color: #232D3F;
+        }
+
+        .defense {
+            border: 2px solid #FFC436;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #FFCD4B;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .defense:hover {
+            background-color: #FFC436;
+            color: #232D3F;
+        }
+
+        .speed {
+            border: 2px solid #FF90C2;
+            padding: 10px;
+            border-radius: 16px;
+            background-color: #F8BDEB;
+            color: #232D3F;
+            cursor: pointer;
+        }
+
+        .speed:hover {
+            background-color: #FF90C2;
             color: #232D3F;
         }
 
@@ -170,7 +215,6 @@
     <div class="content-container">
 
         <a href="{% url 'index'%}" class="back-button"><<</a>
-
         <h1 class="name"><strong>{{ name }} <span class="poke_id">{{id}}</span> </strong></h1>
         <img class="pokemon_image" src="{{ image_url }}" alt="{{ name }}">
 
@@ -178,11 +222,11 @@
             <div class="about">
                 <p class="height"><strong>Height: </strong> {{ height }}</p>
                 <p class="weight"><strong>Weight: </strong> {{ weight }}</p>
+                <p class="attack"> <strong>Attack: </strong> {{ attack }}</p>
+                <p class="defense"> <strong>Defense: </strong> {{ defense }}</p>
+                <p class="speed"> <strong>Speed: </strong> {{ speed }}</p>
             </div>
             <span class="abilities"><strong>Abilities:</strong> {{ abilities|join:', ' }}</span>
-            <ul>
-               
-            </ul>
         </div>
         
     </div>
