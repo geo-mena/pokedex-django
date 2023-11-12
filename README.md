@@ -8,7 +8,7 @@ Esta es una Pokedex que cree consumiendo la API de [Pokeapi](https://pokeapi.co/
 ## Uso y funcionalidades
 Solo tienes que instalar el código, correr el server y probar la Pokedex.
 
-- Te mostrara una lista de pokemon's.
+- Te mostrara una lista de pokemon's. Una maximo de 100.
 - Cuenta con paginacion de 20 por cada pagina.
 - Tambien, puedes escribir el nombre o id del pokemon en el buscador y te mostrará su información.
 - Al hacer click en un pokemon, te aparecera su informacion mas detallada.
