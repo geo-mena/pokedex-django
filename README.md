@@ -5,7 +5,7 @@ Fecha: 12-11-2023
 
 Esta es una Pokedex que cree consumiendo la API de [Pokeapi](https://pokeapi.co/).
 
-## Uso
+## Uso y funcionalidades
 Solo tienes que instalar el código, correr el server y probar la Pokedex.
 
 - Te mostrara una lista de pokemon's.
